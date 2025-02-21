@@ -3,10 +3,12 @@
 {% block title %}Shorten/ed{% endblock %}
 
 {% block main %}
-
-    <form method="post">
-        <input type="text" name="url" placeholder="url" autofocus>
-        <button type="submit">Shorten</button>
-    </form>
-
+    <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
+        <form method="post" class="text-center w-50 w-md-75 w-sm-100">
+            <div class="input-group">
+                <input class="form-control" type="text" name="url" placeholder="Long URL">
+                <button class="btn btn-outline-primary" type="submit">Shorten</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
