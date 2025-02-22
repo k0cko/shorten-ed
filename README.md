@@ -5,6 +5,15 @@ __shorten.ed__ is a simple URL shortener built using Flask and SQLite. The appli
 
 This project was developed as part of my __CS50 Final Project__.
 
+## File explanation:
+- __static/__ Contains index page JS file and logo img
+- __templates/__ Contains the page templates
+- __.gitignore__ Describes the files and folders that should not be version controlled
+- __requirements.txt__ Installs project dependencies
+- __app.py__ Main app file. Handles app routing, creation of new shortened URLs etc.
+- __db.py__ Creates connection to the DB. Creates table if it doesn't exist, and also indexes the long_url and short_code fields of the table, because they're heavily used in order to search for short_code or to check if long_url is already in the DB
+__helpers.py__ Contains helper functions.
+
 ## Features:
 - __Shorten Long URLs__: Converts long URLs into short, easy-to-share links
 - __Asynchronouse Update__: Page is updated asynchronously through JavaScript using Fetch API

@@ -49,10 +49,10 @@ def redirect_to_url(short_code):
 
 
 def add_url(url):
-    short_code = generate_hash()
-    stmt = insert(urls_table).values(long_url=url, short_code=short_code)
     
     with engine.connect() as conn:
+        short_code = generate_hash(conn)
+        stmt = insert(urls_table).values(long_url=url, short_code=short_code)
         conn.execute(stmt)
         conn.commit()
 
