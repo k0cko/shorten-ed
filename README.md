@@ -9,6 +9,9 @@ This project was developed as part of my __CS50 Final Project__.
 - __Shorten Long URLs__: Converts long URLs into short, easy-to-share links
 - __Asynchronouse Update__: Page is updated asynchronously through JavaScript using Fetch API
 
+## Future Improvements:
+- __Link Expiry__: Automatically delete shortened URLs that are 30 days old using CRON
+
 ## Installation Instructions:
 
 To run this project locally, follow these steps:
@@ -32,12 +35,6 @@ cd shorten-ed
 
 ```sh
  pip install -r requirements.txt
-```
-
-### et Up the Database
-
-```sh
- sqlite3 database.db < schema.sql
 ```
 
 ### Run the Application
