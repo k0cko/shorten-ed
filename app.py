@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, abort
 from sqlalchemy import insert, select
 from db import engine, urls_table
 from helpers import is_valid_short_code, generate_hash
@@ -12,11 +12,10 @@ def index():
         url = request.form.get("url")
 
         if not url:
-            # TODO ERROR
-            return "error"
+            return render_template("error.html", error="Please provide URL")
         
         if not bool(validators.url(url)):
-            return "validation error"
+            return render_template("error.html", error="Invalid URL")
 
         # Check if long url exists in the DB
         stmt = select(urls_table.c.short_code).where(urls_table.c.long_url == url)
@@ -29,25 +28,22 @@ def index():
         else:
             short_code = result[0]
         
-        # TODO show user new url
-        return short_code
+        return render_template("success.html", shortened_url=request.url + short_code)
 
     return render_template("index.html")
 
 @app.route('/<string:short_code>')
 def redirect_to_url(short_code):
     if not is_valid_short_code(short_code):
-        # TODO error
-        return "error"
+        abort(404)
 
-    # TODO redirect to long url
+    # Reduirect to long url
     stmt = select(urls_table.c.long_url).where(urls_table.c.short_code == short_code)
     connection = engine.connect()
     result = connection.execute(stmt).first()
 
     if not result:
-        # TODO error
-        return "error"
+        abort(404)
 
     return redirect(result[0])
 

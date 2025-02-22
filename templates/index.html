@@ -3,12 +3,18 @@
 {% block title %}Shorten/ed{% endblock %}
 
 {% block main %}
-    <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
-        <form method="post" class="text-center w-50 w-md-75 w-sm-100">
-            <div class="input-group">
-                <input class="form-control" type="text" name="url" placeholder="Long URL">
-                <button class="btn btn-outline-primary" type="submit">Shorten</button>
-            </div>
-        </form>
+    <div class="container min-vh-100" id="page-content">
+        <div id="form-wrapper" class="text-center w-50 w-md-75 w-sm-100 position-absolute top-50 start-50 translate-middle">
+            <form method="post">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="url" placeholder="Long URL" id="long-url">
+                    <button class="btn btn-outline-primary bg-purple" type="submit" id="shorten_button">Shorten</button>
+                </div>
+            </form>
+        </div>
+        <div id="response" style="top: 65%" class="position-absolute start-50 translate-middle">
+            
+        </div>
     </div>
+    
 {% endblock %}
