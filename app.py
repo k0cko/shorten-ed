@@ -21,6 +21,7 @@ def index():
         stmt = select(urls_table.c.short_code).where(urls_table.c.long_url == url)
         connection = engine.connect()
         result = connection.execute(stmt).first()
+        connection.close()
 
         if not result:
             # Add new long url to DB and return short code so we can give user shortened URL
@@ -41,7 +42,8 @@ def redirect_to_url(short_code):
     stmt = select(urls_table.c.long_url).where(urls_table.c.short_code == short_code)
     connection = engine.connect()
     result = connection.execute(stmt).first()
-
+    connection.close()
+    
     if not result:
         abort(404)
 
@@ -49,7 +51,6 @@ def redirect_to_url(short_code):
 
 
 def add_url(url):
-    
     with engine.connect() as conn:
         short_code = generate_hash(conn)
         stmt = insert(urls_table).values(long_url=url, short_code=short_code)
